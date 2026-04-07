@@ -1,22 +1,21 @@
 from fastapi import FastAPI
-import json
 import os
 
 app = FastAPI()
 
-FILE = "memory.json"
+FILE = "memory.txt"
 
 
 def load_messages():
     if not os.path.exists(FILE):
         return []
     with open(FILE, "r") as f:
-        return json.load(f)
+        return f.readlines()
 
 
 def save_messages(messages):
-    with open(FILE, "w") as f:
-        json.dump(messages, f)
+    with open(FILE, "a") as f:
+        f.writelines(messages)
 
 
 @app.post("/send")

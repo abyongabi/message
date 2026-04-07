@@ -21,7 +21,6 @@ def save_messages(messages):
 @app.post("/send")
 def send_message(message: str):
     messages = load_messages()
-    messages.append("\n")
     messages.append(message)
     save_messages(messages)
     return {"message": "Message received"}
